@@ -6,7 +6,7 @@ sim = Simulation()
 
 # Play with these
 l = 100     # Length of road
-n = 15
+n = 20
 
 NUM_OF_ROADS = 63 # Number of roads
 VEHICLE_RATE = 200 # Vehicle spawn rate per minute
@@ -401,7 +401,7 @@ sim.create_roads([
 
 def road(a):
     if isinstance(a, int):
-        return list(range(a, a + n))
+        return list(range(a+1, a + n))
     elif isinstance(a, list):
         return a
     else:
@@ -419,6 +419,36 @@ sim.create_gen({
     [2, {'path': [17, *road([*road(NUM_OF_ROADS+37*n), 39, *road(NUM_OF_ROADS+19*n), 35, *road(NUM_OF_ROADS+44*n), 13, 57]), 15]}],
     [2, {'path': [14, *road([*road(NUM_OF_ROADS+5*n), 37, *road(NUM_OF_ROADS+47*n), 26, *road(NUM_OF_ROADS+26*n), 20, 46, 28, *road(NUM_OF_ROADS+38*n)]), 1]}],
 ]})
+
+sim.create_signal([[0], [28]])
+sim.create_signal([[3], []])
+
+sim.create_signal([[2], [31]])
+sim.create_signal([[5], []])
+
+sim.create_signal([[23], [29]])
+sim.create_signal([[], [20]])
+
+sim.create_signal([[22], [25]])
+sim.create_signal([[33], [30]])
+
+sim.create_signal([[32], [6]])
+sim.create_signal([[], [9]])
+
+sim.create_signal([[38], [17]])
+sim.create_signal([[], [18]])
+
+sim.create_signal([[39], [34]])
+sim.create_signal([[26], [21]])
+
+sim.create_signal([[27], [37]])
+sim.create_signal([[], [24]])
+
+sim.create_signal([[11], [35]])
+sim.create_signal([[12], []])
+
+sim.create_signal([[13], [36]])
+sim.create_signal([[14], []])
 
 win = Window(sim)
 win.zoom = 10
