@@ -14,11 +14,11 @@ class TrafficSignal:
         self.init_properties()
 
     def set_default_config(self):
-        self.cycle = [(False, False, False, True), (False, False, True, False), (False, True, False, False), (True, False, False, False)]
+        self.cycle = [(False, True), (True, False)]
         self.slow_distance = 50
         self.slow_factor = 0.4
         self.stop_distance = 12
-        self.cycle_length = 1
+        self.cycle_length = 15
 
         self.current_cycle_index = 0
 
@@ -35,10 +35,8 @@ class TrafficSignal:
     
     def update(self, sim):
         cycle_length = self.cycle_length
-        # randomize the cycle length after every cycle
-        if(sim.t % cycle_length == 0):
-            cycle_length = random.randint(20, 40)
-        k = (sim.t // cycle_length) % 4
-        self.current_cycle_index = int(k)
-        if(len(self.roads) < 4):
-            self.current_cycle_index = 3
+        
+        # 根據經過的時間切換信號狀態
+        if sim.t - self.last_t >= cycle_length:
+            self.current_cycle_index = (self.current_cycle_index + 1) % len(self.cycle)
+            self.last_t = sim.t
